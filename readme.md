@@ -1,6 +1,6 @@
 # Introduction
 
-The U-Net training code is original from @hongweilibran/wmh_ibbmTum adapted to Python3. This code implements some data augmentation methods.
+The U-Net training code is original from @hongweilibran adapted to Python3. This code implements some data augmentation methods.
 
 The improvement we propose is augment the data with GANs. Based on the images and masks available we try to generate new **segmented** images.
 
