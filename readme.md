@@ -23,9 +23,9 @@ Project made for UNED - Computer Vision
 [Model description](https://www.sciencedirect.com/science/article/pii/S1053811918305974?via%3Dihub)
 
 # Tasks
-- [x] DCGan implementation
-- [x] Wasserstein loss function and gradient penalty loss
-- [ ] Model tuning
-- [ ] Integration with U-Net code 
+[x] DCGan implementation
+[x] Wasserstein loss function and gradient penalty loss
+[ ] Model tuning
+[ ] Integration with U-Net code 
 
 
