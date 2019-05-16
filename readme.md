@@ -1,8 +1,10 @@
 # Introduction
 
-En el código
+The U-Net training code is original from @hongweilibran/wmh_ibbmTum adapted to Python3. This code implements some data augmentation methods.
 
-Keras implementation of DCGAN and WGAN for image augmentation.
+The improvement we propose is augment the data with GANs. Based on the images and masks available we try to generate new **segmented** images.
+
+Project made for UNED - Computer Vision
 
 # Datasets
 
@@ -19,3 +21,11 @@ Keras implementation of DCGAN and WGAN for image augmentation.
 - evaluation.py: segmentation evaluation metrics
 
 [Model description](https://www.sciencedirect.com/science/article/pii/S1053811918305974?via%3Dihub)
+
+# Tasks
+- [x] DCGan implementation
+- [x] Wasserstein loss function and gradient penalty loss
+- [ ] Model tuning
+- [ ] Integration with U-Net code 
+
+
