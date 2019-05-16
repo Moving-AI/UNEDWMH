@@ -123,7 +123,7 @@ def generate_images(generator_model, output_dir, epoch, n_images, method='FLAIR'
     fig.savefig(f'{output_dir}{method}/epoch_{epoch}.png')
     plt.close(fig)
 
-def sample_best_images(generator_model, output_dir, epoch='No', n_images = 10, n_images_total = 100):
+def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100):
     """Coger las mejores imágenes.
     Cogemos por defecto 100 imágenes del generador (controlandolo con n_images_total)
     Seleccionamos las n_images mejores y las guardamos en un archivo. Guardamos por separado las
