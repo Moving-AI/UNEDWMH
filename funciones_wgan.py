@@ -28,7 +28,7 @@ try:
 except ImportError:
     print('This script depends on pillow! Please install it (e.g. with pip install pillow)')
 
-BATCH_SIZE = 64
+BATCH_SIZE = 8
 # The training ratio is the number of discriminator updates
 # per generator update. The paper uses 5.
 TRAINING_RATIO = 5
@@ -125,24 +125,24 @@ def generate_images(generator_model, output_dir, epoch, n_images, method='FLAIR'
 
 def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100):
     """Coger las mejores imágenes.
-    Cogemos por defecto 100 imágenes del generador (controlandolo con n_images_total)
+    Cogemos por defecto 100 imágenes del generador (controlándolo con n_images_total)
     Seleccionamos las n_images mejores y las guardamos en un archivo. Guardamos por separado las
     FLAIR y las T1.
     """
     images = generator_model.predict(np.random.rand(n_images_total, 128))
     images_mark = discriminator.predict(images).reshape((n_images_total))
     order = np.argsort(-images_mark)[:n_images]
-    
+
     cols = 2
     images_final = images[order,...]
     print(images.shape)
-    
+
     figFLAIR = plt.figure()
-    
+
     for n, image in enumerate(images_final):
         a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
         plt.imshow(image[..., 1], cmap='gray')
-        
+
     figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
     figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
     plt.close(figFLAIR)
