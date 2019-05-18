@@ -137,23 +137,27 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
     images_final = images[order,...]
     print(images.shape)
 
-    figFLAIR = plt.figure()
-
-    for n, image in enumerate(images_final):
-        a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
-        plt.imshow(image[..., 1], cmap='gray')
+    
     if save:
+        figFLAIR = plt.figure()
+        for n, image in enumerate(images_final):
+            a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
+            plt.imshow(image[..., 1], cmap='gray')
+    
         figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
         figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
         plt.close(figFLAIR)
-    figT1 = plt.figure()
-    for n, image in enumerate(images_final):
-        a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
-        plt.imshow(image[..., 0], cmap='gray')
-    figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
-    if save:
+    
+        figT1 = plt.figure()
+        for n, image in enumerate(images_final):
+            a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
+            plt.imshow(image[..., 0], cmap='gray')
+        figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
+    
         print(f'{output_dir}T1/epoch_{epoch}.png')
         figT1.savefig(f'{output_dir}T1/epoch_{epoch}.png')
         plt.close(figT1)
     else:
-        return figFlair, figT1
+        figFLAIR = images_final[...,1].reshape((1,256, 256, 1))
+        figT1 = images_final[...,0].reshape((1,256, 256, 1))
+        return figFLAIR, figT1
