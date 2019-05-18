@@ -123,7 +123,7 @@ def generate_images(generator_model, output_dir, epoch, n_images, method='FLAIR'
     fig.savefig(f'{output_dir}{method}/epoch_{epoch}.png')
     plt.close(fig)
 
-def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100):
+def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100, save = True):
     """Coger las mejores imágenes.
     Cogemos por defecto 100 imágenes del generador (controlándolo con n_images_total)
     Seleccionamos las n_images mejores y las guardamos en un archivo. Guardamos por separado las
@@ -142,15 +142,18 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
     for n, image in enumerate(images_final):
         a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
         plt.imshow(image[..., 1], cmap='gray')
-
-    figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
-    figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
-    plt.close(figFLAIR)
+    if save:
+        figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
+        figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
+        plt.close(figFLAIR)
     figT1 = plt.figure()
     for n, image in enumerate(images_final):
         a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
         plt.imshow(image[..., 0], cmap='gray')
     figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
-    print(f'{output_dir}T1/epoch_{epoch}.png')
-    figT1.savefig(f'{output_dir}T1/epoch_{epoch}.png')
-    plt.close(figT1)
+    if save:
+        print(f'{output_dir}T1/epoch_{epoch}.png')
+        figT1.savefig(f'{output_dir}T1/epoch_{epoch}.png')
+        plt.close(figT1)
+    else:
+        return figFlair, figT1
