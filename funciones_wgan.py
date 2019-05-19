@@ -21,7 +21,7 @@ from keras.layers.merge import _Merge
 from keras import backend as K
 import matplotlib.pyplot as plt
 from functools import partial
-
+import os
 
 try:
     from PIL import Image
@@ -143,7 +143,9 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         for n, image in enumerate(images_final):
             a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 1], cmap='gray')
-    
+        if not os.path.isdir(f'{output_dir}FLAIR/epoch_{epoch}.png'):
+            os.mkdir(f'{output_dir}FLAIR/epoch_{epoch}.png')
+
         figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
         figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
         plt.close(figFLAIR)
@@ -152,12 +154,29 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         for n, image in enumerate(images_final):
             a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 0], cmap='gray')
+        
+        if not os.path.isdir(f'{output_dir}T1/epoch_{epoch}.png'):
+            os.mkdir(f'{output_dir}T1/epoch_{epoch}.png')
+        
         figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
-    
         print(f'{output_dir}T1/epoch_{epoch}.png')
         figT1.savefig(f'{output_dir}T1/epoch_{epoch}.png')
         plt.close(figT1)
+
+        figMask = plt.figure()
+        for n, image in enumerate(images_final):
+            a = figMask.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
+            plt.imshow(image[..., 2], cmap='gray')
+        
+        if not os.path.isdir(f'{output_dir}Mask/epoch_{epoch}.png'):
+            os.mkdir(f'{output_dir}Mask/epoch_{epoch}.png')
+        
+        figMask.set_size_inches(np.array(figMask.get_size_inches()) * n_images)
+        print(f'{output_dir}T1/epoch_{epoch}.png')
+        figMask.savefig(f'{output_dir}T1/epoch_{epoch}.png')
+        plt.close(figMask)
     else:
         figFLAIR = images_final[...,1].reshape((1,256, 256, 1))
         figT1 = images_final[...,0].reshape((1,256, 256, 1))
-        return figFLAIR, figT1
+        figMask = images_final[...,2].reshape((1,256, 256, 1))
+        return figFLAIR, figT1, figMask
