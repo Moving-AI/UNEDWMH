@@ -172,11 +172,13 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
             os.mkdir(f'{output_dir}Mask/')
         
         figMask.set_size_inches(np.array(figMask.get_size_inches()) * n_images)
-        print(f'{output_dir}T1/epoch_{epoch}.png')
-        figMask.savefig(f'{output_dir}T1/epoch_{epoch}.png')
+        print(f'{output_dir}Mask/epoch_{epoch}.png')
+        figMask.savefig(f'{output_dir}Mask/epoch_{epoch}.png')
         plt.close(figMask)
     else:
-        figFLAIR = images_final[...,1].reshape((1,256, 256, 1))
-        figT1 = images_final[...,0].reshape((1,256, 256, 1))
-        figMask = images_final[...,2].reshape((1,256, 256, 1))
-        return figFLAIR, figT1, figMask
+        fig = np.empty((3,256, 256,1))
+        fig[0,...] = images_final[...,0].reshape((1 ,256, 256, 1))
+        fig[1,...] = images_final[...,1].reshape((1 ,256, 256, 1))
+        fig[2,...] = images_final[...,2].reshape((1 ,256, 256, 1))
+
+        return fig
