@@ -143,8 +143,8 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         for n, image in enumerate(images_final):
             a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 1], cmap='gray')
-        if not os.path.isdir(f'{output_dir}FLAIR/epoch_{epoch}.png'):
-            os.mkdir(f'{output_dir}FLAIR/epoch_{epoch}.png')
+        if not os.path.isdir(f'{output_dir}FLAIR/'):
+            os.mkdir(f'{output_dir}FLAIR/')
 
         figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
         figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
@@ -155,8 +155,8 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
             a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 0], cmap='gray')
         
-        if not os.path.isdir(f'{output_dir}T1/epoch_{epoch}.png'):
-            os.mkdir(f'{output_dir}T1/epoch_{epoch}.png')
+        if not os.path.isdir(f'{output_dir}T1/'):
+            os.mkdir(f'{output_dir}T1/')
         
         figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
         print(f'{output_dir}T1/epoch_{epoch}.png')
@@ -168,8 +168,8 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
             a = figMask.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 2], cmap='gray')
         
-        if not os.path.isdir(f'{output_dir}Mask/epoch_{epoch}.png'):
-            os.mkdir(f'{output_dir}Mask/epoch_{epoch}.png')
+        if not os.path.isdir(f'{output_dir}Mask/'):
+            os.mkdir(f'{output_dir}Mask/')
         
         figMask.set_size_inches(np.array(figMask.get_size_inches()) * n_images)
         print(f'{output_dir}T1/epoch_{epoch}.png')
