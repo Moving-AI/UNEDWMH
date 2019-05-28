@@ -123,7 +123,7 @@ def generate_images(generator_model, output_dir, epoch, n_images, method='FLAIR'
     fig.savefig(f'{output_dir}{method}/epoch_{epoch}.png')
     plt.close(fig)
 
-def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100, save = True):
+def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n_images = 10, n_images_total = 100, flag = [1]):
     """Coger las mejores imágenes.
     Cogemos por defecto 100 imágenes del generador (controlándolo con n_images_total)
     Seleccionamos las n_images mejores y las guardamos en un archivo. Guardamos por separado las
@@ -138,7 +138,7 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
     print(images.shape)
 
     
-    if save:
+    if 1 in flag:
         figFLAIR = plt.figure()
         for n, image in enumerate(images_final):
             a = figFLAIR.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
@@ -175,10 +175,33 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         print(f'{output_dir}Mask/epoch_{epoch}.png')
         figMask.savefig(f'{output_dir}Mask/epoch_{epoch}.png')
         plt.close(figMask)
-    else:
+    elif 2 in flag:
         fig = np.empty((3,256, 256,1))
         fig[0,...] = images_final[...,0].reshape((1 ,256, 256, 1))
         fig[1,...] = images_final[...,1].reshape((1 ,256, 256, 1))
         fig[2,...] = images_final[...,2].reshape((1 ,256, 256, 1))
 
         return fig
+    elif 3 in flag:
+        if not os.path.isdir(f'{output_dir}Img_Grandes/'):
+            os.mkdir(f'{output_dir}Img_Grandes/')
+            os.mkdir(f'{output_dir}Img_Grandes/FLAIR')
+            os.mkdir(f'{output_dir}Img_Grandes/T1')
+            os.mkdir(f'{output_dir}Img_Grandes/MASK')
+        images_final_2 = images_final[:3, ...]
+        for n, image in enumerate(images_final_2):
+
+            imFLAIR = plt.figure()
+            plt.imshow(image[...,1], cmap = 'gray')
+            imFLAIR.savefig(f'{output_dir}Img_Grandes/FLAIR/epoch{epoch}_n{n}')
+            plt.close(imFLAIR)
+
+            imT1 = plt.figure()
+            plt.imshow(image[...,0], cmap = 'gray')
+            imFLAIR.savefig(f'{output_dir}Img_Grandes/T1/epoch{epoch}_n{n}')
+            lt.close(imT1)
+
+            imMASK= plt.figure()
+            plt.imshow(image[...,2], cmap = 'gray')
+            imFLAIR.savefig(f'{output_dir}Img_Grandes/MASK/epoch{epoch}_n{n}')
+            lt.close(imMASK)
