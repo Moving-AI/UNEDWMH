@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introducci\363n}{}% 1
+\BOOKMARK [1][-]{section.2}{Redes Neuronales}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Neuronas artificiales}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Redes Neuronales Feed-Forward}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Funciones de activaci\363n}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Sigmoide}{subsection.2.3}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Rectified Linear Unit \(ReLU\)}{subsection.2.3}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Leaky ReLU}{subsection.2.3}% 8
+\BOOKMARK [2][-]{subsection.2.4}{Optimizaci\363n de redes neuronales}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.5}{U-Net}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{GAN: Generative Adversial Networks}{}% 11
+\BOOKMARK [1][-]{section.4}{Implementaci\363n}{}% 12
+\BOOKMARK [1][-]{section.5}{Resultados}{}% 13
+\BOOKMARK [1][-]{section.6}{Discusi\363n}{}% 14
+\BOOKMARK [1][-]{section.7}{Conclusiones}{}% 15
