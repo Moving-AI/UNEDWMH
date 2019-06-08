@@ -34,6 +34,15 @@ BATCH_SIZE = 8
 TRAINING_RATIO = 5
 GRADIENT_PENALTY_WEIGHT = 10  # As per the paper
 
+def write_log(callback, names, logs, batch_no):
+    for name, value in zip(names, logs):
+        summary = tf.Summary()
+        summary_value = summary.value.add()
+        summary_value.simple_value = value
+        summary_value.tag = name
+        callback.writer.add_summary(summary, batch_no)
+        callback.writer.flush()
+
 
 def wasserstein_loss(y_true, y_pred):
     """Calculates the Wasserstein loss for a sample batch.
@@ -137,7 +146,7 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
     images_final = images[order,...]
     print(images.shape)
 
-    
+
     if 1 in flag:
         figFLAIR = plt.figure()
         for n, image in enumerate(images_final):
@@ -149,15 +158,15 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         figFLAIR.set_size_inches(np.array(figFLAIR.get_size_inches()) * n_images)
         figFLAIR.savefig(f'{output_dir}FLAIR/epoch_{epoch}.png')
         plt.close(figFLAIR)
-    
+
         figT1 = plt.figure()
         for n, image in enumerate(images_final):
             a = figT1.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 0], cmap='gray')
-        
+
         if not os.path.isdir(f'{output_dir}T1/'):
             os.mkdir(f'{output_dir}T1/')
-        
+
         figT1.set_size_inches(np.array(figT1.get_size_inches()) * n_images)
         print(f'{output_dir}T1/epoch_{epoch}.png')
         figT1.savefig(f'{output_dir}T1/epoch_{epoch}.png')
@@ -167,10 +176,10 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
         for n, image in enumerate(images_final):
             a = figMask.add_subplot(np.ceil(n_images / float(cols)), cols, n + 1)
             plt.imshow(image[..., 2], cmap='gray')
-        
+
         if not os.path.isdir(f'{output_dir}Mask/'):
             os.mkdir(f'{output_dir}Mask/')
-        
+
         figMask.set_size_inches(np.array(figMask.get_size_inches()) * n_images)
         print(f'{output_dir}Mask/epoch_{epoch}.png')
         figMask.savefig(f'{output_dir}Mask/epoch_{epoch}.png')
@@ -190,7 +199,6 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
             os.mkdir(f'{output_dir}Img_Grandes/MASK')
         images_final_2 = images_final[:3, ...]
         for n, image in enumerate(images_final_2):
-
             imFLAIR = plt.figure()
             plt.imshow(image[...,1], cmap = 'gray')
             imFLAIR.savefig(f'{output_dir}Img_Grandes/FLAIR/epoch{epoch}_n{n}')
@@ -199,9 +207,9 @@ def sample_best_images(generator_model, discriminator, output_dir, epoch='No', n
             imT1 = plt.figure()
             plt.imshow(image[...,0], cmap = 'gray')
             imFLAIR.savefig(f'{output_dir}Img_Grandes/T1/epoch{epoch}_n{n}')
-            lt.close(imT1)
+            plt.close(imT1)
 
             imMASK= plt.figure()
             plt.imshow(image[...,2], cmap = 'gray')
             imFLAIR.savefig(f'{output_dir}Img_Grandes/MASK/epoch{epoch}_n{n}')
-            lt.close(imMASK)
+            plt.close(imMASK)
