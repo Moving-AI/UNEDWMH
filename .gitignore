@@ -1,4 +1,3 @@
-_pycache_
 __pycache__
 .git
 total_three_datasets_sorted.npy
@@ -8,6 +7,6 @@ Weights
 Logos
 output
 logs
-readme2.md
+readmeviejo
 muestra_seleccionada.npy
-Codigo_no_necesario
+NoHaceFalta
