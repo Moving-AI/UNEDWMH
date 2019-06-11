@@ -36,4 +36,5 @@ A lo largo de los notebook pueden encontrarse explicaciones de los pasos realiza
 
 ## Agradecimientos
 Agradecemos a Hongwei Li et al. por proveer el dataset: https://github.com/hongweilibran/wmh_ibbmTum
+
 La implementación de WGAN-GP se ha modificado partiendo de https://github.com/keras-team/keras-contrib/blob/master/examples/improved_wgan.py
