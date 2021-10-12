@@ -2,7 +2,7 @@ Keras==2.2.4
 tensorflow_gpu==1.13.1
 numpy==1.16.3
 matplotlib==3.0.3
-opencv_python==4.1.0.25
+opencv_python==4.2.0.32
 Pillow==6.0.0
 protobuf==3.8.0
 tensorboardcolab==0.0.22
